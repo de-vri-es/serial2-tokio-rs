@@ -3,6 +3,7 @@
 {{readme}}
 
 [`tokio`]: https://docs.rs/tokio/
+[`serial2`]: https://docs.rs/serial2/
 [`SerialPort`]: https://docs.rs/serial2-tokio/latest/serial2_tokio/struct.SerialPort.html
 [`SerialPort::open()`]: https://docs.rs/serial2-tokio/latest/serial2_tokio/struct.SerialPort.html#method.open
 [`IntoSettings`]: https://docs.rs/serial2-tokio/latest/serial2_tokio/trait.IntoSettings.html

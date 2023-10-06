@@ -1,4 +1,4 @@
-//! Serial port communication for [`tokio`].
+//! Serial port communication for [`tokio`] using [`serial2`].
 //!
 //! The `serial2-tokio` crate provides a cross-platform interface to serial ports.
 //! It aims to provide a simpler interface than other alternatives.
@@ -38,9 +38,7 @@
 //! # async fn example() -> std::io::Result<()> {
 //! use serial2_tokio::SerialPort;
 //!
-//! // On Windows, use something like "COM1".
-//! // For COM ports above COM9, you need to use the win32 device namespace, for example "\\.\COM10" (or "\\\\.\\COM10" with string escaping).
-//! // For more details, see: https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file?redirectedfrom=MSDN#win32-device-namespaces
+//! // On Windows, use something like "COM1" or "COM15".
 //! let port = SerialPort::open("/dev/ttyUSB0", 115200)?;
 //! let mut buffer = [0; 256];
 //! loop {
@@ -85,9 +83,7 @@ impl SerialPort {
 	/// For simple cases, you pass a `u32` for the baud rate.
 	/// See [`IntoSettings`] for more information.
 	///
-	/// On Windows, for COM ports above COM9, you need to use the win32 device namespace for the `name` parameter.
-	/// For example "\\.\COM10" (or "\\\\.\\COM10" with string escaping).
-	/// For more details, see [the documentation from Microsoft](https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file?redirectedfrom=MSDN#win32-device-namespaces).
+	/// The library automatically uses the win32 device namespace on Windows, so COM ports above COM9 are supported out of the box.
 	///
 	/// # Example
 	/// ```no_run

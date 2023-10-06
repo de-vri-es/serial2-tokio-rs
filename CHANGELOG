@@ -1,3 +1,6 @@
+# Unreleased
+- [fix][patch] Remove wrong documentation about manually using the win32 device namespace.
+
 # Version 0.1.3 - 2023-10-06
 - [fix][patch] Fix broken links in README.md.
 

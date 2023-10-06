@@ -1,6 +1,6 @@
 # serial2-tokio
 
-Serial port communication for [`tokio`].
+Serial port communication for [`tokio`] using [`serial2`].
 
 The `serial2-tokio` crate provides a cross-platform interface to serial ports.
 It aims to provide a simpler interface than other alternatives.
@@ -39,9 +39,7 @@ This example opens a serial port and echoes back everything that is read.
 ```rust
 use serial2_tokio::SerialPort;
 
-// On Windows, use something like "COM1".
-// For COM ports above COM9, you need to use the win32 device namespace, for example "\\.\COM10" (or "\\\\.\\COM10" with string escaping).
-// For more details, see: https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file?redirectedfrom=MSDN#win32-device-namespaces
+// On Windows, use something like "COM1" or "COM15".
 let port = SerialPort::open("/dev/ttyUSB0", 115200)?;
 let mut buffer = [0; 256];
 loop {
@@ -51,6 +49,7 @@ loop {
 ```
 
 [`tokio`]: https://docs.rs/tokio/
+[`serial2`]: https://docs.rs/serial2/
 [`SerialPort`]: https://docs.rs/serial2-tokio/latest/serial2_tokio/struct.SerialPort.html
 [`SerialPort::open()`]: https://docs.rs/serial2-tokio/latest/serial2_tokio/struct.SerialPort.html#method.open
 [`IntoSettings`]: https://docs.rs/serial2-tokio/latest/serial2_tokio/trait.IntoSettings.html
