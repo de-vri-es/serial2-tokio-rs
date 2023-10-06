@@ -8,6 +8,7 @@ keywords = ["serial", "serial-port", "COM-port", "RS232", "tty"]
 categories = ["hardware-support", "network-programming", "os", "science::robotics", "asynchronous"]
 license = "BSD-2-Clause OR Apache-2.0"
 
+publish = ["crates-io"]
 edition = "2021"
 
 [features]
