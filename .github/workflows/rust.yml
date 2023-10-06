@@ -44,7 +44,6 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: ${{ runner.os }}-cargo
       - name: Clippy
-        uses: actions-rs/clippy-check@v1
+        uses: actions-rs-plus/clippy-check@v2.1.1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           args: --workspace --all-targets --all-features
