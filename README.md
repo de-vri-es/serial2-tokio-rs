@@ -9,7 +9,7 @@ Currently supported features:
 * Simple interface: one [`SerialPort`] struct for all supported platforms.
 * List available ports.
 * Custom baud rates on all supported platforms except Solaris and Illumos.
-* Concurrent reads and writes from multiple threads, even on Windows.
+* Concurrent reads and writes from multiple tasks, even on Windows.
 * Purge the OS buffers (useful to discard read noise when the line should have been silent, for example).
 * Read and control individual modem status lines to use them as general purpose I/O.
 * Cross platform configuration of serial port settings:
@@ -27,7 +27,7 @@ Doing that will also configure a character size of 8 bits with 1 stop bit and di
 For full control over the applied settings, pass a closure that receives the the current [`Settings`] and return the desired settings.
 If you do, you will almost always want to call [`Settings::set_raw()`] before changing any other settings.
 
-The [`SerialPort`] struct implements the standard [`tokio::io::AysyncRead`] and [`tokio::io::AsyncWrite`] traits,
+The [`SerialPort`] struct implements the standard [`tokio::io::AsyncRead`] and [`tokio::io::AsyncWrite`] traits,
 as well as [`read()`][`SerialPort::read()`] and [`write()`][`SerialPort::write()`] functions that take `&self` instead of `&mut self`.
 This allows you to use the serial port concurrently from multiple tasks.
 

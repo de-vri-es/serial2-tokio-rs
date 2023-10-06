@@ -7,7 +7,7 @@
 //! * Simple interface: one [`SerialPort`] struct for all supported platforms.
 //! * List available ports.
 //! * Custom baud rates on all supported platforms except Solaris and Illumos.
-//! * Concurrent reads and writes from multiple threads, even on Windows.
+//! * Concurrent reads and writes from multiple tasks, even on Windows.
 //! * Purge the OS buffers (useful to discard read noise when the line should have been silent, for example).
 //! * Read and control individual modem status lines to use them as general purpose I/O.
 //! * Cross platform configuration of serial port settings:
@@ -25,7 +25,7 @@
 //! For full control over the applied settings, pass a closure that receives the the current [`Settings`] and return the desired settings.
 //! If you do, you will almost always want to call [`Settings::set_raw()`] before changing any other settings.
 //!
-//! The [`SerialPort`] struct implements the standard [`tokio::io::AysyncRead`] and [`tokio::io::AsyncWrite`] traits,
+//! The [`SerialPort`] struct implements the standard [`tokio::io::AsyncRead`] and [`tokio::io::AsyncWrite`] traits,
 //! as well as [`read()`][`SerialPort::read()`] and [`write()`][`SerialPort::write()`] functions that take `&self` instead of `&mut self`.
 //! This allows you to use the serial port concurrently from multiple tasks.
 //!
@@ -128,22 +128,19 @@ impl SerialPort {
 
 	/// Read bytes from the serial port.
 	///
-	/// This is identical to [`AsyncReadExt::read()`], except that this function takes a const reference `&self`.
-	/// This allows you to use the serial port concurrently from multiple threads.
+	/// This is identical to [`AsyncReadExt::read()`][tokio::io::AsyncReadExt::read], except that this function takes a const reference `&self`.
+	/// This allows you to use the serial port concurrently from multiple tasks.
 	///
-	/// Note that there are no guarantees on which thread receives what data when multiple threads are reading from the serial port.
-	/// You should normally limit yourself to a single reading thread and a single writing thread.
+	/// Note that there are no guarantees about which task receives what data when multiple tasks are reading from the serial port.
+	/// You should normally limit yourself to a single reading task and a single writing task.
 	pub async fn read(&self, buf: &mut [u8]) -> std::io::Result<usize> {
 		self.inner.read(buf).await
 	}
 
 	/// Read bytes from the serial port into a slice of buffers.
 	///
-	/// This is identical to [`AsyncReadExt::read_vectored()`], except that this function takes a const reference `&self`.
-	/// This allows you to use the serial port concurrently from multiple threads.
-	///
-	/// Note that there are no guarantees on which thread receives what data when multiple threads are reading from the serial port.
-	/// You should normally limit yourself to a single reading thread and a single writing thread.
+	/// Note that there are no guarantees about which task receives what data when multiple tasks are reading from the serial port.
+	/// You should normally limit yourself to a single reading task and a single writing task.
 	pub async fn read_vectored(&self, buf: &mut [IoSliceMut<'_>]) -> std::io::Result<usize> {
 		self.inner.read_vectored(buf).await
 	}
@@ -158,11 +155,11 @@ impl SerialPort {
 
 	/// Write bytes to the serial port.
 	///
-	/// This is identical to [`AsyncWriteExt::write()`], except that this function takes a const reference `&self`.
-	/// This allows you to use the serial port concurrently from multiple threads.
+	/// This is identical to [`AsyncWriteExt::write()`][tokio::io::AsyncWriteExt::write], except that this function takes a const reference `&self`.
+	/// This allows you to use the serial port concurrently from multiple tasks.
 	///
-	/// Note that data written to the same serial port from multiple threads may end up interleaved at the receiving side.
-	/// You should normally limit yourself to a single reading thread and a single writing thread.
+	/// Note that data written to the same serial port from multiple tasks may end up interleaved at the receiving side.
+	/// You should normally limit yourself to a single reading task and a single writing task.
 	pub async fn write(&self, buf: &[u8]) -> std::io::Result<usize> {
 		self.inner.write(buf).await
 	}
@@ -172,11 +169,11 @@ impl SerialPort {
 	/// This will continue to call [`Self::write()`] until the entire buffer has been written,
 	/// or an I/O error occurs.
 	///
-	/// This is identical to [`AsyncWriteExt::write_all()`], except that this function takes a const reference `&self`.
-	/// This allows you to use the serial port concurrently from multiple threads.
+	/// This is identical to [`AsyncWriteExt::write_all()`][tokio::io::AsyncWriteExt::write_all], except that this function takes a const reference `&self`.
+	/// This allows you to use the serial port concurrently from multiple tasks.
 	///
-	/// Note that data written to the same serial port from multiple threads may end up interleaved at the receiving side.
-	/// You should normally limit yourself to a single reading thread and a single writing thread.
+	/// Note that data written to the same serial port from multiple tasks may end up interleaved at the receiving side.
+	/// You should normally limit yourself to a single reading task and a single writing task.
 	pub async fn write_all(&self, buf: &[u8]) -> std::io::Result<()> {
 		let mut written = 0;
 		while written < buf.len() {
@@ -187,11 +184,11 @@ impl SerialPort {
 
 	/// Write bytes to the serial port from a slice of buffers.
 	///
-	/// This is identical to [`AsyncWriteExt::write_vectored()`], except that this function takes a const reference `&self`.
-	/// This allows you to use the serial port concurrently from multiple threads.
+	/// This is identical to [`AsyncWriteExt::write_vectored()`][tokio::io::AsyncWriteExt::write_vectored], except that this function takes a const reference `&self`.
+	/// This allows you to use the serial port concurrently from multiple tasks.
 	///
-	/// Note that data written to the same serial port from multiple threads may end up interleaved at the receiving side.
-	/// You should normally limit yourself to a single reading thread and a single writing thread.
+	/// Note that data written to the same serial port from multiple tasks may end up interleaved at the receiving side.
+	/// You should normally limit yourself to a single reading task and a single writing task.
 	pub async fn write_vectored(&self, buf: &[IoSlice<'_>]) -> std::io::Result<usize> {
 		self.inner.write_vectored(buf).await
 	}
