@@ -28,6 +28,21 @@ jobs:
         with:
           command: test
           args: --workspace --all-targets --all-features --color=always
+
+  clippy:
+    name: Clippy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: ${{ runner.os }}-cargo
       - name: Clippy
         uses: actions-rs/clippy-check@v1
         with:
