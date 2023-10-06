@@ -1,3 +1,6 @@
+# Unreleased
+- [fix][patch] Fix broken links in README.md.
+
 # Version 0.1.2 - 2023-10-06
 - [change][minor] Update `serial2` to `v0.2.5` for better read timeout behavior.
 
