@@ -1,2 +1,5 @@
+# Unreleased
+- [change][minor] Update `serial2` to `v0.2.5` for better read timeout behavior.
+
 # Version 0.1.0 - 2023-10-06
 - [add][minor] Initial release.

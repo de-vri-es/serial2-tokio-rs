@@ -11,10 +11,16 @@ pub struct SerialPort {
 
 impl SerialPort {
 	pub fn wrap(inner: serial2::SerialPort) -> std::io::Result<Self> {
+		// We don't want timeouts on the operations themselves.
+		// The user can use `tokio::time::timeout()` if they want.
+		inner.set_read_timeout(u32::MAX)?;
+		inner.set_write_timeout(u32::MAX)?;
+
 		// First try to convert the inner serial port to a `NamedPipeClient`.
 		// Only when that succeeded relinquish ownership of the file handle by forggeting `inner`.
 		let io = unsafe { NamedPipeClient::from_raw_handle(inner.as_raw_handle())? };
 		std::mem::forget(inner);
+
 		Ok(Self {
 			io,
 		})
