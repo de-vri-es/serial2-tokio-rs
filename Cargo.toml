@@ -1,6 +1,6 @@
 [package]
 name = "serial2-tokio"
-version = "0.1.1"
+version = "0.1.2"
 description = "cross platform serial ports for tokio based on the serial2 crate"
 repository = "https://github.com/de-vri-es/serial2-tokio-rs"
 documentation = "https://docs.rs/serial2-tokio"
