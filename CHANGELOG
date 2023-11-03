@@ -1,3 +1,6 @@
+# Unreleased
+- [fix][minor] Update `serial2` to `v0.2.8` to work correctly with `epoll()`.
+
 # Version 0.1.4 - 2023-10-06
 - [fix][patch] Remove wrong documentation about manually using the win32 device namespace.
 

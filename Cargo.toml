@@ -15,7 +15,7 @@ edition = "2021"
 doc = ["tokio/io-util"]
 
 [dependencies]
-serial2 = "0.2.5"
+serial2 = "0.2.8"
 tokio = { version = "1.32.0", default-features = false, features = ["net"] }
 
 [target.'cfg(unix)'.dependencies]
