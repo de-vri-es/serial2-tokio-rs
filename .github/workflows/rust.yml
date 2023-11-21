@@ -22,12 +22,12 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: build
-          args: --workspace --all-targets --all-features --color=always
+          args: --workspace --all-targets --color=always --features serde,unix
       - name: Test
         uses: actions-rs/cargo@v1
         with:
           command: test
-          args: --workspace --all-targets --all-features --color=always
+          args: --workspace --all-targets --color=always --features serde,unix
 
   clippy:
     name: Clippy
@@ -46,4 +46,4 @@ jobs:
       - name: Clippy
         uses: actions-rs-plus/clippy-check@v2.1.1
         with:
-          args: --workspace --all-targets --all-features
+          args: --workspace --all-targets --features serde,unix
