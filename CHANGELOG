@@ -1,4 +1,4 @@
-# Unreleased
+# Version 0.1.6 - 2023-11-21
 - [change][minor] Update `serial2` to `v0.2.10`.
 - [add][minor] Expose the `unix`, `windows` and `serde` features of the `serial2` crate.
 
