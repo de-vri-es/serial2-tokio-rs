@@ -12,10 +12,21 @@ publish = ["crates-io"]
 edition = "2021"
 
 [features]
-doc = ["tokio/io-util"]
+# The "unix" feature enables Unix specific extensions.
+unix = ["serial2/unix"]
+
+# The "windows" features enables windows specific extensions.
+windows = ["serial2/windows"]
+
+# Add #[doc(cfg(...))] annotations to platform specific items for better documentation (requires nightly toolchain).
+doc-cfg = ["serial2/doc-cfg"]
+
+serde = ["serial2/serde"]
+
+doc = ["tokio/io-util", "serial2/unix", "serial2/windows"]
 
 [dependencies]
-serial2 = "0.2.8"
+serial2 = "0.2.10"
 tokio = { version = "1.32.0", default-features = false, features = ["net"] }
 
 [target.'cfg(unix)'.dependencies]
@@ -28,4 +39,4 @@ winapi = { version = "0.3.9", features = ["winerror"] }
 tokio = { version = "1.32.0", features = ["macros", "rt", "io-std", "io-util"] }
 
 [package.metadata.docs.rs]
-features = ["doc"]
+features = ["doc", "doc-cfg"]
