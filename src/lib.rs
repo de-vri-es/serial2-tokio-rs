@@ -49,6 +49,9 @@
 //! ```
 
 #![warn(missing_docs)]
+#![warn(private_interfaces)]
+#![warn(private_bounds)]
+
 use std::io::{IoSliceMut, IoSlice};
 use std::path::{Path, PathBuf};
 use std::pin::Pin;
@@ -65,6 +68,7 @@ pub use serial2::{
 	Parity,
 	Settings,
 	StopBits,
+	TryFromError,
 };
 use tokio::io::{AsyncRead, AsyncWrite};
 
