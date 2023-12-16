@@ -1,4 +1,4 @@
-# Unreleased
+# Version 0.1.7 - 2023-12-16
 - [change][minor] Update `serial2` to `v0.2.14`.
 - [add][minor] Implement `Display` for `CharSize`, `StopBits`, `Parity` and `FlowControl`.
 - [add][minor] Add more conversions between primitive types and  `CharSize`, `StopBits`, `Parity` and `FlowControl`.
