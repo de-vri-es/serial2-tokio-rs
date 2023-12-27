@@ -26,6 +26,10 @@ impl SerialPort {
 		})
 	}
 
+	pub fn try_clone(&self) -> std::io::Result<Self> {
+		Self::wrap(self.with_raw(|raw| raw.try_clone())?)
+	}
+
 	pub fn with_raw<F, R>(&self, function: F) -> R
 	where
 		F: FnOnce(&serial2::SerialPort) -> R

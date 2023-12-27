@@ -1,3 +1,7 @@
+# Unreleased
+- [change][minor] Update `serial2` to `v0.2.15`.
+- [add][minor] Add `SerialPort::try_clone()` function.
+
 # Version 0.1.7 - 2023-12-16
 - [change][minor] Update `serial2` to `v0.2.14`.
 - [add][minor] Implement `Display` for `CharSize`, `StopBits`, `Parity` and `FlowControl`.
