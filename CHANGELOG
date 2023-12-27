@@ -1,4 +1,4 @@
-# Unreleased
+# Version 0.1.8 - 2023-12-27
 - [change][minor] Update `serial2` to `v0.2.15`.
 - [add][minor] Add `SerialPort::try_clone()` function.
 
