@@ -152,9 +152,9 @@ dependencies = [
 
 [[package]]
 name = "serial2"
-version = "0.2.15"
+version = "0.2.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "107ddb5824edab54dd2423fbc488a3e714a73475fa097dfbbc1baa996353c69a"
+checksum = "7eea9caf87881a41a0d01cc89ee8abc5d690b943b07b282d9cde0a1dbb30cbb6"
 dependencies = [
  "cfg-if",
  "libc",
