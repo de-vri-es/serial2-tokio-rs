@@ -149,6 +149,7 @@ impl SerialPort {
 	///
 	/// Note that there are no guarantees about which task receives what data when multiple tasks are reading from the serial port.
 	/// You should normally limit yourself to a single reading task and a single writing task.
+	#[cfg_attr(not(feature = "doc"), allow(rustdoc::broken_intra_doc_links))]
 	pub async fn read(&self, buf: &mut [u8]) -> std::io::Result<usize> {
 		self.inner.read(buf).await
 	}
@@ -176,6 +177,7 @@ impl SerialPort {
 	///
 	/// Note that data written to the same serial port from multiple tasks may end up interleaved at the receiving side.
 	/// You should normally limit yourself to a single reading task and a single writing task.
+	#[cfg_attr(not(feature = "doc"), allow(rustdoc::broken_intra_doc_links))]
 	pub async fn write(&self, buf: &[u8]) -> std::io::Result<usize> {
 		self.inner.write(buf).await
 	}
@@ -190,6 +192,7 @@ impl SerialPort {
 	///
 	/// Note that data written to the same serial port from multiple tasks may end up interleaved at the receiving side.
 	/// You should normally limit yourself to a single reading task and a single writing task.
+	#[cfg_attr(not(feature = "doc"), allow(rustdoc::broken_intra_doc_links))]
 	pub async fn write_all(&self, buf: &[u8]) -> std::io::Result<()> {
 		let mut written = 0;
 		while written < buf.len() {
@@ -205,6 +208,7 @@ impl SerialPort {
 	///
 	/// Note that data written to the same serial port from multiple tasks may end up interleaved at the receiving side.
 	/// You should normally limit yourself to a single reading task and a single writing task.
+	#[cfg_attr(not(feature = "doc"), allow(rustdoc::broken_intra_doc_links))]
 	pub async fn write_vectored(&self, buf: &[IoSlice<'_>]) -> std::io::Result<usize> {
 		self.inner.write_vectored(buf).await
 	}
