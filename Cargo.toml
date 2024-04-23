@@ -18,15 +18,20 @@ unix = ["serial2/unix"]
 # The "windows" features enables windows specific extensions.
 windows = ["serial2/windows"]
 
+# The "rs4xx" feature enables RS-485/RS-422 specific extensions on supported platforms.
+rs4xx = ["serial2/rs4xx"]
+
 # Add #[doc(cfg(...))] annotations to platform specific items for better documentation (requires nightly toolchain).
 doc-cfg = ["serial2/doc-cfg"]
 
+# Enable limited serde support for serial port configuration.
 serde = ["serial2/serde"]
 
-doc = ["tokio/io-util", "serial2/unix", "serial2/windows"]
+# Add stub implementation of all feature and platform specific items, to allow full documentation to build on all platforms.
+doc = ["tokio/io-util", "serial2/doc"]
 
 [dependencies]
-serial2 = "0.2.17"
+serial2 = "0.2.24"
 tokio = { version = "1.32.0", default-features = false, features = ["net"] }
 
 [target.'cfg(unix)'.dependencies]
@@ -37,6 +42,7 @@ winapi = { version = "0.3.9", features = ["winerror"] }
 
 [dev-dependencies]
 tokio = { version = "1.32.0", features = ["macros", "rt", "io-std", "io-util"] }
+serial2 = { version = "0.2.22", features = ["rs4xx"] }
 
 [package.metadata.docs.rs]
 features = ["doc", "doc-cfg"]
