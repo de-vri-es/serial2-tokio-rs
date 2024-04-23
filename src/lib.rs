@@ -70,6 +70,11 @@ pub use serial2::{
 	StopBits,
 	TryFromError,
 };
+
+#[cfg_attr(feature = "doc-cfg", doc(cfg(feature = "rs4xx")))]
+#[cfg(any(feature = "doc", feature = "rs4xx"))]
+pub use serial2::rs4xx;
+
 use tokio::io::{AsyncRead, AsyncWrite};
 
 /// An asynchronous serial port for Tokio.
@@ -144,6 +149,7 @@ impl SerialPort {
 	///
 	/// Note that there are no guarantees about which task receives what data when multiple tasks are reading from the serial port.
 	/// You should normally limit yourself to a single reading task and a single writing task.
+	#[cfg_attr(not(feature = "doc"), allow(rustdoc::broken_intra_doc_links))]
 	pub async fn read(&self, buf: &mut [u8]) -> std::io::Result<usize> {
 		self.inner.read(buf).await
 	}
@@ -171,6 +177,7 @@ impl SerialPort {
 	///
 	/// Note that data written to the same serial port from multiple tasks may end up interleaved at the receiving side.
 	/// You should normally limit yourself to a single reading task and a single writing task.
+	#[cfg_attr(not(feature = "doc"), allow(rustdoc::broken_intra_doc_links))]
 	pub async fn write(&self, buf: &[u8]) -> std::io::Result<usize> {
 		self.inner.write(buf).await
 	}
@@ -185,6 +192,7 @@ impl SerialPort {
 	///
 	/// Note that data written to the same serial port from multiple tasks may end up interleaved at the receiving side.
 	/// You should normally limit yourself to a single reading task and a single writing task.
+	#[cfg_attr(not(feature = "doc"), allow(rustdoc::broken_intra_doc_links))]
 	pub async fn write_all(&self, buf: &[u8]) -> std::io::Result<()> {
 		let mut written = 0;
 		while written < buf.len() {
@@ -200,6 +208,7 @@ impl SerialPort {
 	///
 	/// Note that data written to the same serial port from multiple tasks may end up interleaved at the receiving side.
 	/// You should normally limit yourself to a single reading task and a single writing task.
+	#[cfg_attr(not(feature = "doc"), allow(rustdoc::broken_intra_doc_links))]
 	pub async fn write_vectored(&self, buf: &[IoSlice<'_>]) -> std::io::Result<usize> {
 		self.inner.write_vectored(buf).await
 	}
@@ -286,6 +295,42 @@ impl SerialPort {
 	/// or the Receive Line Signal Detect (RLSD) line.
 	pub fn read_cd(&self) -> std::io::Result<bool> {
 		self.inner.with_raw(|raw| raw.read_cd())
+	}
+
+	/// Get the RS-4xx mode of the serial port transceiver.
+	///
+	/// This is currently only supported on Linux.
+	///
+	/// Not all serial ports can be configured in a different mode by software.
+	/// Some serial ports are always in RS-485 or RS-422 mode,
+	/// and some may have hardware switches or jumpers to configure the transceiver.
+	/// In those cases, this function will usually report an error or [`rs4xx::TransceiverMode::Default`],
+	/// even though the serial port is configured is RS-485 or RS-422 mode.
+	///
+	/// Note that driver support for this feature is very limited and sometimes inconsistent.
+	/// Please read all the warnings in the [`rs4xx`] module carefully.
+	#[cfg(any(feature = "doc", all(feature = "rs4xx", target_os = "linux")))]
+	#[cfg_attr(feature = "doc-cfg", doc(cfg(all(feature = "rs4xx", target_os = "linux"))))]
+	pub fn get_rs4xx_mode(&self) -> std::io::Result<rs4xx::TransceiverMode> {
+		self.inner.with_raw(|raw| raw.get_rs4xx_mode())
+	}
+
+	/// Set the RS-4xx mode of the serial port transceiver.
+	///
+	/// This is currently only supported on Linux.
+	///
+	/// Not all serial ports can be configured in a different mode by software.
+	/// Some serial ports are always in RS-485 or RS-422 mode,
+	/// and some may have hardware switches or jumpers to configure the transceiver.
+	/// In that case, this function will usually return an error,
+	/// but the port can still be in RS-485 or RS-422 mode.
+	///
+	/// Note that driver support for this feature is very limited and sometimes inconsistent.
+	/// Please read all the warnings in the [`rs4xx`] module carefully.
+	#[cfg(any(feature = "doc", all(feature = "rs4xx", target_os = "linux")))]
+	#[cfg_attr(feature = "doc-cfg", doc(cfg(all(feature = "rs4xx", target_os = "linux"))))]
+	pub fn set_rs4xx_mode(&self, mode: impl Into<rs4xx::TransceiverMode>) -> std::io::Result<()> {
+		self.inner.with_raw(|raw| raw.set_rs4xx_mode(mode))
 	}
 }
 

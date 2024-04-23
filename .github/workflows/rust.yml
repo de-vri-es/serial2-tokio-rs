@@ -28,10 +28,26 @@ jobs:
         with:
           command: test
           args: --workspace --all-targets --color=always --features serde,unix
+      - name: Clippy
+        uses: actions-rs-plus/clippy-check@v2.1.1
+        with:
+          args: --workspace --all-targets --features serde,unix
 
-  clippy:
-    name: Clippy
+  check_configurations:
+    name: Check codebase
     runs-on: ubuntu-latest
+    env:
+      RUSTFLAGS: "-D warnings"
+      RUSTDOCFLAGS: "-D warnings"
+    strategy:
+      matrix:
+        target:
+        - "x86_64-unknown-linux-gnu"
+        - "aarch64-unknown-linux-gnu"
+        - "x86_64-pc-windows-msvc"
+        - "x86_64-apple-darwin"
+        - "x86_64-unknown-freebsd"
+        - "x86_64-unknown-netbsd"
     steps:
       - name: Checkout code
         uses: actions/checkout@master
@@ -41,9 +57,42 @@ jobs:
             ~/.cargo/registry
             ~/.cargo/git
             target
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: ${{ runner.os }}-cargo
-      - name: Clippy
-        uses: actions-rs-plus/clippy-check@v2.1.1
-        with:
-          args: --workspace --all-targets --features serde,unix
+          key: ${{ runner.os }}-cargo-${{ matrix.target }}
+      - name: Install toolchain
+        run: rustup target add ${{ matrix.target }}
+      - name: Check (no features)
+        run: |
+            cargo clippy --workspace --color=always --target ${{ matrix.target }}
+            cargo doc    --workspace --color=always --target ${{ matrix.target }}
+      - name: Check --features doc
+        run: |
+            cargo clippy --workspace --color=always --target ${{ matrix.target }} --features doc
+            cargo doc    --workspace --color=always --target ${{ matrix.target }} --features doc
+      - name: Check --features unix
+        run: |
+            cargo clippy --workspace --color=always --target ${{ matrix.target }} --features unix
+            cargo doc    --workspace --color=always --target ${{ matrix.target }} --features unix
+      - name: Check --features windows
+        run: |
+            cargo clippy --workspace --color=always --target ${{ matrix.target }} --features windows
+            cargo doc    --workspace --color=always --target ${{ matrix.target }} --features windows
+      - name: Check --features rs4xx
+        run: |
+            cargo clippy --workspace --color=always --target ${{ matrix.target }} --features rs4xx
+            cargo doc    --workspace --color=always --target ${{ matrix.target }} --features rs4xx
+      - name: Check --features unix,windows
+        run: |
+            cargo clippy --workspace --color=always --target ${{ matrix.target }} --features unix,windows
+            cargo doc    --workspace --color=always --target ${{ matrix.target }} --features unix,windows
+      - name: Check --features unix,rs4xx
+        run: |
+            cargo clippy --workspace --color=always --target ${{ matrix.target }} --features unix,rs4xx
+            cargo doc    --workspace --color=always --target ${{ matrix.target }} --features unix,rs4xx
+      - name: Check --features windows,rs4xx
+        run: |
+            cargo clippy --workspace --color=always --target ${{ matrix.target }} --features windows,rs4xx
+            cargo doc    --workspace --color=always --target ${{ matrix.target }} --features windows,rs4xx
+      - name: Check --features unix,windows,rs4xx
+        run: |
+            cargo clippy --workspace --color=always --target ${{ matrix.target }} --features unix,windows,rs4xx
+            cargo doc    --workspace --color=always --target ${{ matrix.target }} --features unix,windows,rs4xx

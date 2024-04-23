@@ -67,7 +67,7 @@ impl SerialPort {
 	}
 
 	pub async fn read_vectored(&self, bufs: &mut [IoSliceMut<'_>]) -> std::io::Result<usize> {
-		if bufs.len() == 0 {
+		if bufs.is_empty() {
 			self.read(&mut []).await
 		} else {
 			self.read(&mut bufs[0]).await
@@ -95,7 +95,7 @@ impl SerialPort {
 	}
 
 	pub async fn write_vectored(&self, bufs: &[IoSlice<'_>]) -> std::io::Result<usize> {
-		if bufs.len() == 0 {
+		if bufs.is_empty() {
 			self.write(&[]).await
 		} else {
 			self.write(&bufs[0]).await
