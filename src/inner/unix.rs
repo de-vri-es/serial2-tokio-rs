@@ -106,7 +106,7 @@ impl SerialPort {
 		buf: &[u8],
 	) -> Poll<std::io::Result<usize>> {
 		loop {
-			let mut guard = ready!(self.io.poll_read_ready(cx)?);
+			let mut guard = ready!(self.io.poll_write_ready(cx)?);
 			let result = guard.try_io(|inner|{
 				check_ret(unsafe {
 					libc::write(inner.as_raw_fd(), buf.as_ptr().cast(), buf.len())
@@ -125,7 +125,7 @@ impl SerialPort {
 		bufs: &[IoSlice<'_>],
 	) -> Poll<Result<usize, std::io::Error>> {
 		loop {
-			let mut guard = ready!(self.io.poll_read_ready(cx)?);
+			let mut guard = ready!(self.io.poll_write_ready(cx)?);
 			let result = guard.try_io(|inner| {
 				let buf_count = i32::try_from(bufs.len()).unwrap_or(i32::MAX);
 				check_ret(unsafe {
