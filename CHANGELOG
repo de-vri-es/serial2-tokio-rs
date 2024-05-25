@@ -1,3 +1,6 @@
+# Unreleased
+- [fix][minor] Fix possible infinite waiting in write functions.
+
 # Version 0.1.10 - 2024-04-23
 - [add][minor] Expose the "rs4xx" feature of the `serial2` crate.
 
