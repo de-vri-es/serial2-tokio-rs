@@ -1,4 +1,4 @@
-# Unreleased
+# Version 0.1.11 - 2024-05-25
 - [fix][minor] Fix possible infinite waiting in write functions.
 
 # Version 0.1.10 - 2024-04-23
