@@ -1,4 +1,4 @@
-# Unreleased
+# Version 0.1.12 - 2024-06-13
 - [fix][patch] Fix build of documentation on docs.rs.
 
 # Version 0.1.11 - 2024-05-25
