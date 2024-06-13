@@ -1,3 +1,6 @@
+# Unreleased
+- [fix][patch] Fix build of documentation on docs.rs.
+
 # Version 0.1.11 - 2024-05-25
 - [fix][minor] Fix possible infinite waiting in write functions.
 
