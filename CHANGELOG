@@ -1,4 +1,4 @@
-# Unreleased
+# Version 0.1.13 - 2024-06-21
 - [add][minor] Support more custom baud rates on iOS and macOS.
 
 # Version 0.1.12 - 2024-06-13
