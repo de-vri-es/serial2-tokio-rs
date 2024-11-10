@@ -140,3 +140,12 @@ impl SerialPort {
 		Poll::Ready(Err(std::io::Error::from_raw_os_error(error as i32)))
 	}
 }
+
+impl std::fmt::Debug for SerialPort {
+	#[inline]
+	fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+		self.with_raw(|serial_port| {
+			std::fmt::Debug::fmt(serial_port, f)
+		})
+	}
+}

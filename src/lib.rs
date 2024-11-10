@@ -372,3 +372,10 @@ impl AsyncWrite for SerialPort {
 		self.get_mut().inner.poll_shutdown(cx)
 	}
 }
+
+impl std::fmt::Debug for SerialPort {
+	#[inline]
+	fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+		std::fmt::Debug::fmt(&self.inner, f)
+	}
+}
