@@ -152,3 +152,10 @@ fn check_ret(value: isize) -> std::io::Result<usize> {
 		Ok(value as usize)
 	}
 }
+
+impl std::fmt::Debug for SerialPort {
+	#[inline]
+	fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+		std::fmt::Debug::fmt(&self.io.get_ref(), f)
+	}
+}
