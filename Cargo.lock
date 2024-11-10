@@ -164,7 +164,7 @@ dependencies = [
 
 [[package]]
 name = "serial2-tokio"
-version = "0.1.13"
+version = "0.1.14"
 dependencies = [
  "libc",
  "serial2",
