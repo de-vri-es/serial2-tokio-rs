@@ -1,3 +1,6 @@
+# Unreleased
+- [add][minor] Add `SerialPort::set_break()` to hold the data line in break condition.
+
 # Version 0.1.14 - 2024-11-10
 - [fix][minor] Fix verification of applied settings on iOS and macOS.
 - [fix][minor] Allow for a 2.5% deviation in actual baud rate when applying settings on Unix.
