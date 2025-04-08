@@ -9,8 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@master
-      - uses: actions/cache@v2
+        uses: actions/checkout@v4
+      - uses: actions/cache@v4
         with:
           path: |
             ~/.cargo/registry
@@ -19,15 +19,9 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: ${{ runner.os }}-cargo
       - name: Build
-        uses: actions-rs/cargo@v1
-        with:
-          command: build
-          args: --workspace --all-targets --color=always --features serde,unix
+        run: cargo build --workspace --all-targets --color=always --features serde,unix
       - name: Test
-        uses: actions-rs/cargo@v1
-        with:
-          command: test
-          args: --workspace --all-targets --color=always --features serde,unix
+        run: cargo test --workspace --all-targets --color=always --features serde,unix
       - name: Clippy
         uses: actions-rs-plus/clippy-check@v2.1.1
         with:
@@ -50,8 +44,8 @@ jobs:
         - "x86_64-unknown-netbsd"
     steps:
       - name: Checkout code
-        uses: actions/checkout@master
-      - uses: actions/cache@v2
+        uses: actions/checkout@v4
+      - uses: actions/cache@v4
         with:
           path: |
             ~/.cargo/registry
