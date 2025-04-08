@@ -32,7 +32,7 @@ doc = ["tokio/io-util", "serial2/doc"]
 
 [dependencies]
 serial2 = "0.2.28"
-tokio = { version = "1.32.0", default-features = false, features = ["net"] }
+tokio = { version = "1.38.2", default-features = false, features = ["net"] }
 
 [target.'cfg(unix)'.dependencies]
 libc = "0.2.148"
@@ -41,7 +41,7 @@ libc = "0.2.148"
 winapi = { version = "0.3.9", features = ["winerror"] }
 
 [dev-dependencies]
-tokio = { version = "1.32.0", features = ["macros", "rt", "io-std", "io-util"] }
+tokio = { version = "1.38.2", features = ["macros", "rt", "io-std", "io-util"] }
 serial2 = { version = "0.2.22", features = ["rs4xx"] }
 
 [package.metadata.docs.rs]
