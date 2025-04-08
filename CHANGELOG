@@ -1,4 +1,4 @@
-# Unreleased
+# Version 0.1.15 - 2025-04-08
 - [add][minor] Add `SerialPort::set_break()` to hold the data line in break condition.
 
 # Version 0.1.14 - 2024-11-10
