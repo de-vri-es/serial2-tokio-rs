@@ -1,4 +1,4 @@
-# Unreleased
+# Version 0.1.16 - 2025-07-31
 - [fix][minor] Fix `SerialPort::discard_buffers()` on Unix platforms.
 
 # Version 0.1.15 - 2025-04-08
