@@ -31,7 +31,7 @@ serde = ["serial2/serde"]
 doc = ["tokio/io-util", "serial2/doc"]
 
 [dependencies]
-serial2 = "0.2.31"
+serial2 = "0.2.32"
 tokio = { version = "1.38.2", default-features = false, features = ["net"] }
 
 [target.'cfg(unix)'.dependencies]
