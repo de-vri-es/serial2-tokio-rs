@@ -152,9 +152,9 @@ dependencies = [
 
 [[package]]
 name = "serial2"
-version = "0.2.31"
+version = "0.2.32"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "26e1e5956803a69ddd72ce2de337b577898801528749565def03515f82bad5bb"
+checksum = "349bb79c63bd2690fe4ca8ef7072a6d9ca36b3a1687a08393e733ea56d573911"
 dependencies = [
  "cfg-if",
  "libc",
@@ -164,7 +164,7 @@ dependencies = [
 
 [[package]]
 name = "serial2-tokio"
-version = "0.1.17"
+version = "0.1.18"
 dependencies = [
  "libc",
  "serial2",
