@@ -44,7 +44,7 @@ let port = SerialPort::open("/dev/ttyUSB0", 115200)?;
 let mut buffer = [0; 256];
 loop {
     let read = port.read(&mut buffer).await?;
-    port.write(&buffer[..read]).await?;
+    port.write_all(&buffer[..read]).await?;
 }
 ```
 
