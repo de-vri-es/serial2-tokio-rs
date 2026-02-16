@@ -112,6 +112,16 @@ impl SerialPort {
 		})
 	}
 
+	/// Open a connected pair of pseudo-terminals.
+	#[cfg(any(feature = "doc", all(unix, feature = "unix")))]
+	#[cfg_attr(feature = "doc-cfg", doc(cfg(feature = "unix")))]
+	pub fn pair() -> std::io::Result<(Self, Self)> {
+		let (a, b) = serial2::SerialPort::pair()?;
+		let a = Self { inner: inner::SerialPort::wrap(a)? };
+		let b = Self { inner: inner::SerialPort::wrap(b)? };
+		Ok((a, b))
+	}
+
 	/// Get a list of available serial ports.
 	///
 	/// Not currently supported on all platforms.

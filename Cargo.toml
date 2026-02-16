@@ -43,6 +43,11 @@ winapi = { version = "0.3.9", features = ["winerror"] }
 [dev-dependencies]
 tokio = { version = "1.38.2", features = ["macros", "rt", "io-std", "io-util"] }
 serial2 = { version = "0.2.22", features = ["rs4xx"] }
+assert2 = "0.3.18"
+
+[target.'cfg(unix)'.dev-dependencies]
+libc = "0.2.148"
+serial2-tokio = { path = ".", features = ["unix"] }
 
 [package.metadata.docs.rs]
 features = ["doc", "doc-cfg"]
