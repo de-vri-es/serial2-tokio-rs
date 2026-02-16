@@ -31,7 +31,7 @@ serde = ["serial2/serde"]
 doc = ["tokio/io-util", "serial2/doc"]
 
 [dependencies]
-serial2 = "0.2.32"
+serial2 = "0.2.34"
 tokio = { version = "1.38.2", default-features = false, features = ["net"] }
 
 [target.'cfg(unix)'.dependencies]
@@ -42,7 +42,7 @@ winapi = { version = "0.3.9", features = ["winerror"] }
 
 [dev-dependencies]
 tokio = { version = "1.38.2", features = ["macros", "rt", "io-std", "io-util"] }
-serial2 = { version = "0.2.22", features = ["rs4xx"] }
+serial2 = { version = "0.2.34", features = ["rs4xx"] }
 assert2 = "0.3.18"
 
 [target.'cfg(unix)'.dev-dependencies]
