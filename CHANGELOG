@@ -1,4 +1,4 @@
-# Unreleased
+# Version 0.1.21 - 2026-02-16
 - [fix][minor] Make `SerialPort::pair()` open the first PTY in non-blocking mode.
 
 # Version 0.1.20 - 2026-02-16
