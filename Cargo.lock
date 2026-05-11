@@ -180,7 +180,7 @@ dependencies = [
 
 [[package]]
 name = "serial2-tokio"
-version = "0.1.23"
+version = "0.1.24"
 dependencies = [
  "assert2",
  "libc",

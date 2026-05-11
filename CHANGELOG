@@ -1,4 +1,4 @@
-# Unreleased
+# Version 0.1.24 - 2026-05-11
 - [change][minor] Switch from `winapi` to `windows-sys` for Windows platforms.
 
 # Version 0.1.23 - 2026-04-13
