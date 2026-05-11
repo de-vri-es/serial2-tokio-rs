@@ -31,14 +31,14 @@ serde = ["serial2/serde"]
 doc = ["tokio/io-util", "serial2/doc"]
 
 [dependencies]
-serial2 = "0.2.36"
+serial2 = "0.2.37"
 tokio = { version = "1.38.2", default-features = false, features = ["net"] }
 
 [target.'cfg(unix)'.dependencies]
 libc = "0.2.148"
 
 [target.'cfg(windows)'.dependencies]
-winapi = { version = "0.3.9", features = ["winerror"] }
+windows-sys = { version = "0.61", features = ["Win32_Networking"] }
 
 [dev-dependencies]
 tokio = { version = "1.38.2", features = ["macros", "rt", "io-std", "io-util"] }
