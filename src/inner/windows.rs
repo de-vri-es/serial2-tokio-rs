@@ -136,8 +136,8 @@ impl SerialPort {
 
 	pub fn poll_shutdown(&mut self, _cx: &mut std::task::Context<'_>) -> Poll<Result<(), std::io::Error>> {
 		// Serial ports can not be shut down.
-		let error = winapi::shared::winerror::WSAENOTSOCK;
-		Poll::Ready(Err(std::io::Error::from_raw_os_error(error as i32)))
+		use windows_sys::Win32::Networking::WinSock::WSAENOTSOCK;
+		Poll::Ready(Err(std::io::Error::from_raw_os_error(WSAENOTSOCK)))
 	}
 }
 
